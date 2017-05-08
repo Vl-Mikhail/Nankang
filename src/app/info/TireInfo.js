@@ -1,21 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
     Linking,
     Text,
-    Image,
     View,
-    AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Button } from "react-native-elements";
 import styles from './style/TireInfo';
-
+import { LocalImage } from '../list/components'
 
 
 export default class TireInfo extends Component {
 
     static navigationOptions = {
         header: null
+    };
+
+    static propTypes = {
+        name: PropTypes.string,
+        price: PropTypes.string,
+        description: PropTypes.string,
+        url: PropTypes.string,
+        navigation: PropTypes.object
     };
 
     render () {
@@ -25,9 +31,12 @@ export default class TireInfo extends Component {
 
         return (
             <View style={styles.container}>
-                <Image source={require('../../img/one.jpg')} style={styles.PinImage}>
-
-                </Image>
+                <LocalImage source={require('../../img/one.jpg')}
+                            style={styles.PinImage}
+                            originalWidth={640}
+                            originalHeight={480}
+                            navigation={navigation}
+                />
                 <View style={styles.PinInfo}>
                     <View style={styles.PinAbout}>
                         <View style={styles.PinIcon}>

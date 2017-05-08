@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { List, ListItem } from 'react-native-elements';
 import * as firebase from 'firebase';
 import styles from './style/TireList';
+import { LocalImage } from './components'
 
 
 const text = 'Шин Nankang данного размера нет в наличии';
@@ -25,7 +26,7 @@ export default class TireList extends Component {
             rowHasChanged: (row1, row2) => row1 !== row2,
         }),
         animating: true,
-        alertText:'',
+        alertText: '',
         models: [],
     };
 
@@ -61,7 +62,7 @@ export default class TireList extends Component {
                 item.diameter === diameter
             );
 
-            if(sortTask.length === 0){
+            if (sortTask.length === 0) {
                 Alert.alert(text);
                 this.setState({alertText: text});
                 this.setState({animating: false});
@@ -107,14 +108,14 @@ export default class TireList extends Component {
 
         return (
             <View style={styles.container}>
-                <Image source={require('../../img/one.jpg')} style={styles.PinImage}>
-                    <View style={styles.PinIcon}>
-                        <Icon name="ios-arrow-back" size={32} color="black" onPress={() => navigation.goBack()}/>
-                    </View>
-                    <View style={styles.PinTitle}>
-                        <Text style={styles.PinTitleText}>МОДЕЛИ ШИН</Text>
-                    </View>
-                </Image>
+                <LocalImage source={require('../../img/one.jpg')}
+                            style={styles.PinImage}
+                            originalWidth={640}
+                            originalHeight={480}
+                            navigation={navigation}
+                            title="МОДЕЛЬ ШИН"
+                            icon="ios-arrow-back"
+                />
                 {spinner}
                 {models.length === 0 &&
                 <Text style={{margin: 10, fontSize: 20}}>

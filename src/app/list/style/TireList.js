@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     PinImage: {
         flex: 1,
         resizeMode: 'stretch',
-        width: PixelRatio.get() * 190,
     },
     PinTitle: {
         flex: 3,

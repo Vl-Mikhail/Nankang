@@ -144,10 +144,12 @@ export class HomeScreen extends Component {
                 </View>
                 }
 
+                {!animating &&
                 <TouchableOpacity style={styles.PinButton}
                                   onPress={this.onSearchPressed}>
                     <Text style={styles.PinButtonText}>Найти шины</Text>
                 </TouchableOpacity>
+                }
 
                 <View style={styles.PinEngineer}>
                     <Text style={styles.PinEngineerText}>Best app <Text

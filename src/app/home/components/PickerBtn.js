@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Text, TouchableOpacity, View } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './style/Picker';
@@ -17,5 +18,10 @@ const Picker = ({state, action}) => (
     </View>
 
 );
+
+Picker.propTypes = {
+    state: PropTypes.string,
+    action: PropTypes.func
+};
 
 export default Picker;
