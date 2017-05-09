@@ -8,6 +8,9 @@ import React from 'react';
 import { AppRegistry } from 'react-native';
 import Root from './src/Root';
 import * as firebase from 'firebase';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
+
 
 let config = {
     apiKey: "AIzaSyBqBxTHvFXF0aRbajLFt-rAVWh4-o4p5LA",
@@ -19,6 +22,10 @@ let config = {
 };
 firebase.initializeApp(config);
 
-const Main = () => <Root />;
+const Main = () => (
+    <Provider store={store}>
+        <Root />
+    </Provider>
+);
 
 AppRegistry.registerComponent('Nankang', () => Main);

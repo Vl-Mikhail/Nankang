@@ -14,8 +14,13 @@ import { PickerBtn } from './components';
 import styles from './style/HomeScreen';
 import * as api from '../../utils/api'
 
+import { fetchTypes } from './actions';
+import { connect } from 'react-redux';
+
 
 const url_mail = 'http://www.nankang.ru/contacts.htm';
+
+@connect(state => ({home: state.home}), { fetchTypes })
 export class HomeScreen extends Component {
 
     static navigationOptions = {
@@ -35,6 +40,7 @@ export class HomeScreen extends Component {
     }
 
     componentDidMount () {
+        this.props.fetchTypes();
         this._fetchData();
     }
 
@@ -104,6 +110,8 @@ export class HomeScreen extends Component {
     render () {
         const {animating} = this.state;
         const {navigate} = this.props.navigation;
+
+        console.log('KGJKDGJ', this.props);
 
         const spinner = animating ?
             <ActivityIndicator

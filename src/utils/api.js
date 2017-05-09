@@ -18,6 +18,21 @@ function checkParams (navigate, state) {
     }
 }
 
+async function fetchTpye () {
+    try {
+        const type = await firebase.database().ref().child('type').once('value', snap => {
+            let data = [];
+            snap.forEach(item => {
+                data.push(item.val().code);
+            });
+        });
+
+        return type;
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 function getData (field, data) {
     return firebase.database().ref().child(field).once('value').then(snap => {
         snap.forEach(item => {
@@ -26,4 +41,4 @@ function getData (field, data) {
     });
 }
 
-export { checkParams, getData };
+export { checkParams, getData, fetchTpye };
