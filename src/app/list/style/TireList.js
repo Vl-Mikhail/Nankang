@@ -1,4 +1,4 @@
-import { StyleSheet, PixelRatio } from 'react-native';
+import { StyleSheet } from "react-native";
 
 /**
  * Стили для списка
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
     PinTitle: {
         flex: 3,
-        alignItems:'center',
+        alignItems: 'center',
     },
     PinTitleText: {
         color: 'white',
@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
         fontWeight: '100',
     },
     PinIcon: {
-        flex:1,
+        flex: 1,
         marginLeft: 20,
         alignItems: 'flex-start',
-        justifyContent:'flex-end',
+        justifyContent: 'flex-end',
     },
     PinList: {
         flex: 2.5,

@@ -1,7 +1,5 @@
-import * as firebase from 'firebase';
-import {
-    Alert,
-} from 'react-native';
+import * as firebase from "firebase";
+import { Alert } from "react-native";
 
 
 function checkParams (navigate, state) {

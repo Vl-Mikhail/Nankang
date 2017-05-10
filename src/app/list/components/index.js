@@ -1,4 +1,4 @@
-import LocalImage from './LocalImage';
+import LocalImage from "./LocalImage";
 
 export {
     LocalImage,

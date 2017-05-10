@@ -1,4 +1,4 @@
-import { StyleSheet, PixelRatio } from 'react-native';
+import { PixelRatio, StyleSheet } from "react-native";
 
 /**
  * Стили для информации

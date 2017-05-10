@@ -1,5 +1,5 @@
-import { HomeScreen } from './HomeScreen';
-import HomeReducer from './reducer';
+import { HomeScreen } from "./HomeScreen";
+import HomeReducer from "./reducer";
 
 export {
     HomeScreen,

@@ -1,21 +1,14 @@
-import React, { Component } from 'react';
-import {
-    Text,
-    Image,
-    View,
-    TouchableOpacity,
-    Linking,
-    ActivityIndicator
-} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { SocialIcon } from 'react-native-elements';
-import Picker from 'react-native-picker';
-import { PickerBtn } from './components';
-import styles from './style/HomeScreen';
-import * as api from '../../utils/api'
+import React, { Component } from "react";
+import { ActivityIndicator, Image, Linking, Text, TouchableOpacity, View } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+import { SocialIcon } from "react-native-elements";
+import Picker from "react-native-picker";
+import { PickerBtn } from "./components";
+import styles from "./style/HomeScreen";
+import * as api from "../../utils/api";
 
-import { fetchTypes } from './actions';
-import { connect } from 'react-redux';
+import { fetchTypes } from "./actions";
+import { connect } from "react-redux";
 
 
 const url_mail = 'http://www.nankang.ru/contacts.htm';
@@ -92,7 +85,7 @@ export class HomeScreen extends Component {
     }
 
     render () {
-        const {isFetched, error} = this.props.home;
+        const {navigation: {navigate}, home: {isFetched, error}} = this.props;
 
         if (!isFetched) {
             return (

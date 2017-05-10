@@ -1,18 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/Ionicons';
-import styles from '../style/TireList';
-import {
-    Image,
-    Dimensions,
-    View,
-    Text
-} from 'react-native';
+import React from "react";
+import PropTypes from "prop-types";
+import Icon from "react-native-vector-icons/Ionicons";
+import styles from "../style/TireList";
+import { Dimensions, Image, Text, View } from "react-native";
 
-const LocalImage = ({source, originalWidth, originalHeight, navigation, title, icon}) =>{
+const LocalImage = ({source, originalWidth, originalHeight, navigation, title, icon}) => {
     let window = Dimensions.get('window').width;
-    let newHeight = originalHeight * window/originalWidth - 70;
-    return(
+    let newHeight = originalHeight * window / originalWidth - 70;
+    return (
         <Image source={source} style={{width: window, height: newHeight}}>
             <View style={styles.PinIcon}>
                 {icon &&

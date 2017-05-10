@@ -1,4 +1,4 @@
-import TireInfo from './TireInfo';
+import TireInfo from "./TireInfo";
 
 export {
     TireInfo,

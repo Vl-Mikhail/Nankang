@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import { Text, TouchableOpacity, View } from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons';
-import styles from './style/Picker';
+import Icon from "react-native-vector-icons/Ionicons";
+import styles from "./style/Picker";
 
 const Picker = ({state, action}) => (
 

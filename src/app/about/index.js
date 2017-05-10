@@ -1,4 +1,4 @@
-import AboutNankang from './AboutNankang';
+import AboutNankang from "./AboutNankang";
 
 export {
     AboutNankang,

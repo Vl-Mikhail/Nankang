@@ -1,6 +1,6 @@
-import React from 'react';
-import Navigator from './routes/Navigator';
-import * as firebase from 'firebase';
+import React from "react";
+import Navigator from "./routes/Navigator";
+import * as firebase from "firebase";
 
 
 let config = {

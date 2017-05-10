@@ -1,4 +1,4 @@
-import {FETCH_TIRES, FETCH_TIRES_ERROR, FETCH_TIRES_SUCCESS} from './actions';
+import { FETCH_TIRES, FETCH_TIRES_ERROR, FETCH_TIRES_SUCCESS } from "./actions";
 
 const INITIAL_STATE = {
     tires: {},
@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
 
-    switch(action.type) {
+    switch (action.type) {
         case FETCH_TIRES:
             return state;
         case FETCH_TIRES_SUCCESS:

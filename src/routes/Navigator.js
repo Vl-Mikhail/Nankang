@@ -1,5 +1,5 @@
-import { StackNavigator } from 'react-navigation';
-import { HomeScreen, TireList, TireInfo, AboutNankang } from '../app';
+import { StackNavigator } from "react-navigation";
+import { AboutNankang, HomeScreen, TireInfo, TireList } from "../app";
 
 
 export default StackNavigator({

@@ -1,17 +1,11 @@
-import React, { Component } from 'react';
-import {
-    Image,
-    ListView,
-    View,
-    ActivityIndicator,
-    Text
-} from 'react-native';
-import { List, ListItem } from 'react-native-elements';
-import styles from './style/TireList';
-import { LocalImage } from './components'
-import PropTypes from 'prop-types';
-import { fetchTire } from './actions';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { ActivityIndicator, Image, ListView, Text, View } from "react-native";
+import { List, ListItem } from "react-native-elements";
+import styles from "./style/TireList";
+import { LocalImage } from "./components";
+import PropTypes from "prop-types";
+import { fetchTire } from "./actions";
+import { connect } from "react-redux";
 
 
 const text = 'Шин Nankang данного размера нет в наличии';
@@ -126,7 +120,7 @@ export default class TireList extends Component {
 
 TireList.propTypes = {
     navigation: PropTypes.object.isRequired,
-    tires: PropTypes.object.shape({
+    tires: PropTypes.shape({
         tires: PropTypes.object,
         isFetched: PropTypes.bool,
         error: PropTypes.string

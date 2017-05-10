@@ -1,4 +1,4 @@
-import {FETCH_TYPES, FETCH_TYPES_ERROR, FETCH_TYPES_SUCCESS} from './actions';
+import { FETCH_TYPES, FETCH_TYPES_ERROR, FETCH_TYPES_SUCCESS } from "./actions";
 
 const INITIAL_STATE = {
     data: {},
@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
 
-    switch(action.type) {
+    switch (action.type) {
         case FETCH_TYPES:
             return state;
         case FETCH_TYPES_SUCCESS:
