@@ -1,7 +1,7 @@
-import {FETCH_TYPES, FETCH_TYPES_ERROR, FETCH_TYPES_SUCCESS} from './actions';
+import {FETCH_TIRES, FETCH_TIRES_ERROR, FETCH_TIRES_SUCCESS} from './actions';
 
 const INITIAL_STATE = {
-    data: {},
+    tires: {},
     error: null,
     isFetched: false
 };
@@ -9,15 +9,15 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
 
     switch(action.type) {
-        case FETCH_TYPES:
+        case FETCH_TIRES:
             return state;
-        case FETCH_TYPES_SUCCESS:
+        case FETCH_TIRES_SUCCESS:
             return {
                 ...state,
-                data: action.data,
+                tires: action.data,
                 isFetched: true
             };
-        case FETCH_TYPES_ERROR:
+        case FETCH_TIRES_ERROR:
             return {
                 ...state,
                 error: action.error,

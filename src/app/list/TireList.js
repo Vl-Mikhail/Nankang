@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import {
-    Alert,
     Image,
     ListView,
     View,
     ActivityIndicator,
     Text
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { List, ListItem } from 'react-native-elements';
-import * as firebase from 'firebase';
 import styles from './style/TireList';
 import { LocalImage } from './components'
+import PropTypes from 'prop-types';
+import { fetchTire } from './actions';
+import { connect } from 'react-redux';
 
 
 const text = 'Шин Nankang данного размера нет в наличии';
+
+@connect(state => ({tires: state.tires}), {fetchTire})
 export default class TireList extends Component {
 
     static navigationOptions = {
@@ -25,61 +27,37 @@ export default class TireList extends Component {
         dataSource: new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2,
         }),
-        animating: true,
         alertText: '',
-        models: [],
     };
 
     componentDidMount () {
-        this._fetchData();
+        this._loadInitialState().done();
+
     }
 
-    _fetchData = () => {
-        const {type, width, series, diameter} = this.props.navigation.state.params;
-        const rootRef = firebase.database().ref().child('tires');
+    _loadInitialState = async () => {
+        try {
+            const {type, width, series, diameter} = this.props.navigation.state.params;
+            await this.props.fetchTire();
 
-        rootRef.on('value', snap => {
-            let tires = [];
-            snap.forEach(item => {
-                tires.push({
-                    name: item.val().name,
-                    type: item.val().type,
-                    width: item.val().width,
-                    series: item.val().series,
-                    diameter: item.val().diameter,
-                    price: item.val().price,
-                    subtitle: item.val().subtitle,
-                    description: item.val().description,
-                    avatar_url: item.val().avatar_url,
-                    url: item.val().url
-                });
-            });
-
-            let sortTask = tires.filter(item =>
+            let sortTask = this.props.tires.tires.filter(item =>
                 item.type === type &&
                 item.width === width &&
                 item.series === series &&
                 item.diameter === diameter
             );
 
-            if (sortTask.length === 0) {
-                Alert.alert(text);
-                this.setState({alertText: text});
-                this.setState({animating: false});
-                return;
-            }
-
             this.setState({
-                animating: false,
-                models: sortTask,
                 dataSource: this.state.dataSource.cloneWithRows(sortTask)
             });
-        });
+        } catch (e) {
+            console.log(e)
+        }
     };
 
     _rowPressed (rowId) {
-        let property = this.state.models[rowId];
-        this.props.navigation.navigate('Info', property)
+        const {tires} = this.props.tires;
+        this.props.navigation.navigate('Info', tires[rowId])
     }
 
     renderRow = (rowData, sectionID, rowId) => {
@@ -96,15 +74,27 @@ export default class TireList extends Component {
     };
 
     render () {
-        const {navigation} = this.props;
-        const {models, alertText} = this.state;
+        const {navigation, tires: {isFetched, error}} = this.props;
+        const {dataSource} = this.state;
 
-        const spinner = this.state.animating ?
-            <ActivityIndicator
-                animating={this.state.animating}
-                style={[styles.centering, {height: 80}]}
-                size="large"
-            /> : <View/>;
+        if (!isFetched) {
+            return (
+                <View>
+                    <Image source={require('../../img/one.jpg')} style={styles.PinImage}/>
+                    <ActivityIndicator
+                        animating={!isFetched}
+                        style={[styles.centering]}
+                        size="large"
+                    />
+                </View>
+            )
+        } else if (error) {
+            return (
+                <View>
+                    <Text>{error}</Text>
+                </View>
+            )
+        }
 
         return (
             <View style={styles.container}>
@@ -116,22 +106,29 @@ export default class TireList extends Component {
                             title="МОДЕЛЬ ШИН"
                             icon="ios-arrow-back"
                 />
-                {spinner}
-                {models.length === 0 &&
-                <Text style={{margin: 10, fontSize: 20}}>
-                    {alertText}
-                </Text>
+                {dataSource._cachedRowCount === 0 ?
+                    <Text style={{margin: 10, fontSize: 20}}>
+                        {text}
+                    </Text> :
+                    <View style={styles.PinList}>
+                        <List containerStyle={{borderBottomWidth: 0, borderTopWidth: 0}}>
+                            <ListView
+                                renderRow={this.renderRow}
+                                dataSource={dataSource}
+                            />
+                        </List>
+                    </View>
                 }
-                <View style={styles.PinList}>
-                    <List containerStyle={{borderBottomWidth: 0, borderTopWidth: 0}}>
-                        <ListView
-                            renderRow={this.renderRow}
-                            dataSource={this.state.dataSource}
-                        />
-                    </List>
-                </View>
             </View>
         );
     }
 }
 
+TireList.propTypes = {
+    navigation: PropTypes.object.isRequired,
+    tires: PropTypes.object.shape({
+        tires: PropTypes.object,
+        isFetched: PropTypes.bool,
+        error: PropTypes.string
+    })
+};

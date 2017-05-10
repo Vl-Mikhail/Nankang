@@ -18,27 +18,56 @@ function checkParams (navigate, state) {
     }
 }
 
-async function fetchTpye () {
+async function fetchType () {
     try {
-        const type = await firebase.database().ref().child('type').once('value', snap => {
-            let data = [];
-            snap.forEach(item => {
-                data.push(item.val().code);
-            });
-        });
+        const data = {types: [], widths: [], serieses: [], diameters: []};
 
-        return type;
+        await getData('type', data.types);
+        await getData('width', data.widths);
+        await getData('series', data.serieses);
+        await getData('diameter', data.diameters);
+
+        return data;
     } catch (e) {
         console.log(e)
     }
 }
 
-function getData (field, data) {
-    return firebase.database().ref().child(field).once('value').then(snap => {
+async function fetchTires () {
+    try {
+        let tires = [];
+        await getTire(tires);
+        return tires;
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+async function getTire (tires) {
+    return await firebase.database().ref().child('tires').once('value', snap => {
+        snap.forEach(item => {
+            tires.push({
+                name: item.val().name,
+                type: item.val().type,
+                width: item.val().width,
+                series: item.val().series,
+                diameter: item.val().diameter,
+                price: item.val().price,
+                subtitle: item.val().subtitle,
+                description: item.val().description,
+                avatar_url: item.val().avatar_url,
+                url: item.val().url
+            });
+        });
+    });
+}
+
+async function getData (field, data) {
+    return await firebase.database().ref().child(field).once('value').then(snap => {
         snap.forEach(item => {
             data.push(item.val().code);
         });
     });
 }
 
-export { checkParams, getData, fetchTpye };
+export { checkParams, fetchType, fetchTires };

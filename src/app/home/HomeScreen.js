@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 
 const url_mail = 'http://www.nankang.ru/contacts.htm';
 
-@connect(state => ({home: state.home}), { fetchTypes })
+@connect(state => ({home: state.home}), {fetchTypes})
 export class HomeScreen extends Component {
 
     static navigationOptions = {
@@ -41,23 +41,7 @@ export class HomeScreen extends Component {
 
     componentDidMount () {
         this.props.fetchTypes();
-        this._fetchData();
     }
-
-    _fetchData = () => {
-        const data = {types: [], widths: [], serieses: [], diameters: []};
-        const rootType = api.getData('type', data.types);
-        const rootWidth = api.getData('width', data.widths);
-        const rootSeries = api.getData('series', data.serieses);
-        const rootDiameter = api.getData('diameter', data.diameters);
-
-        Promise.all([rootType, rootWidth, rootSeries, rootDiameter]).then(() => {
-            this.setState({animating: false});
-            this.setState({data: data});
-        });
-
-
-    };
 
     onSearchPressed = () => {
         const {navigate} = this.props.navigation;
@@ -65,19 +49,19 @@ export class HomeScreen extends Component {
     };
 
     showTypePicker = () => {
-        this._pickerProps('Тип шин', this.state.data.types, 'type');
+        this._pickerProps('Тип шин', this.props.home.data.types, 'type');
     };
 
     showWidthPicker = () => {
-        this._pickerProps('Ширина', this.state.data.widths, 'width');
+        this._pickerProps('Ширина', this.props.home.data.widths, 'width');
     };
 
     showSeriesPicker = () => {
-        this._pickerProps('Профиль', this.state.data.serieses, 'series');
+        this._pickerProps('Профиль', this.props.home.data.serieses, 'series');
     };
 
     showDiameterPicker = () => {
-        this._pickerProps('Диаметр', this.state.data.diameters, 'diameter');
+        this._pickerProps('Диаметр', this.props.home.data.diameters, 'diameter');
     };
 
     _pickerProps (title, data, state) {
@@ -108,17 +92,26 @@ export class HomeScreen extends Component {
     }
 
     render () {
-        const {animating} = this.state;
-        const {navigate} = this.props.navigation;
+        const {isFetched, error} = this.props.home;
 
-        console.log('KGJKDGJ', this.props);
+        if (!isFetched) {
+            return (
+                <Image source={require('../../img/background.png')} style={styles.container}>
+                    <ActivityIndicator
+                        animating={this.state.animating}
+                        style={[styles.centering]}
+                        size="large"
+                    />
+                </Image>
+            )
+        } else if (error) {
+            return (
+                <View>
+                    <Text>{error}</Text>
+                </View>
+            )
+        }
 
-        const spinner = animating ?
-            <ActivityIndicator
-                animating={this.state.animating}
-                style={[styles.centering]}
-                size="large"
-            /> : <View/>;
 
         return (
             <Image source={require('../../img/background.png')} style={styles.container}>
@@ -142,22 +135,17 @@ export class HomeScreen extends Component {
                 <View style={styles.PinTitle}>
                     <Text style={styles.PinTitleText}>NANKANG</Text>
                 </View>
-                {spinner}
-                {!animating &&
                 <View style={styles.PinItems}>
                     <PickerBtn state={this.state.type} action={this.showTypePicker}/>
                     <PickerBtn state={this.state.width} action={this.showWidthPicker}/>
                     <PickerBtn state={this.state.series} action={this.showSeriesPicker}/>
                     <PickerBtn state={this.state.diameter} action={this.showDiameterPicker}/>
                 </View>
-                }
 
-                {!animating &&
                 <TouchableOpacity style={styles.PinButton}
                                   onPress={this.onSearchPressed}>
                     <Text style={styles.PinButtonText}>Найти шины</Text>
                 </TouchableOpacity>
-                }
 
                 <View style={styles.PinEngineer}>
                     <Text style={styles.PinEngineerText}>Best app <Text

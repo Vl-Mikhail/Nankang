@@ -7,20 +7,9 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
 import Root from './src/Root';
-import * as firebase from 'firebase';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 
-
-let config = {
-    apiKey: "AIzaSyBqBxTHvFXF0aRbajLFt-rAVWh4-o4p5LA",
-    authDomain: "nankang-78d26.firebaseapp.com",
-    databaseURL: "https://nankang-78d26.firebaseio.com",
-    projectId: "nankang-78d26",
-    storageBucket: "nankang-78d26.appspot.com",
-    messagingSenderId: "157539529642"
-};
-firebase.initializeApp(config);
 
 const Main = () => (
     <Provider store={store}>
