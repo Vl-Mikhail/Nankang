@@ -24,29 +24,28 @@ export default class TireList extends Component {
         alertText: '',
     };
 
-    componentDidMount () {
-        this._loadInitialState().done();
-
+    async componentDidMount () {
+        try {
+            await this.props.fetchTire();
+            this._loadInitialState();
+        } catch (e){
+            console.log(e);
+        }
     }
 
-    _loadInitialState = async () => {
-        try {
-            const {type, width, series, diameter} = this.props.navigation.state.params;
-            await this.props.fetchTire();
+    _loadInitialState = () => {
+        const {type, width, series, diameter} = this.props.navigation.state.params;
 
-            let sortTask = this.props.tires.tires.filter(item =>
-                item.type === type &&
-                item.width === width &&
-                item.series === series &&
-                item.diameter === diameter
-            );
+        let sortTask = this.props.tires.tires.filter(item =>
+            item.type === type &&
+            item.width === width &&
+            item.series === series &&
+            item.diameter === diameter
+        );
 
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(sortTask)
-            });
-        } catch (e) {
-            console.log(e)
-        }
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(sortTask)
+        });
     };
 
     _rowPressed (rowId) {

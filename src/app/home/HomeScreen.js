@@ -6,6 +6,7 @@ import Picker from "react-native-picker";
 import { PickerBtn } from "./components";
 import styles from "./style/HomeScreen";
 import * as api from "../../utils/api";
+import PropTypes from "prop-types";
 
 import { fetchTypes } from "./actions";
 import { connect } from "react-redux";
@@ -152,3 +153,13 @@ export class HomeScreen extends Component {
         )
     }
 }
+
+HomeScreen.propTypes = {
+    navigation: PropTypes.object.isRequired,
+    fetchTypes: PropTypes.func,
+    home: PropTypes.shape({
+        data: PropTypes.object,
+        isFetched: PropTypes.bool,
+        error: PropTypes.string
+    })
+};

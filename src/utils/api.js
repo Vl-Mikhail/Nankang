@@ -61,7 +61,7 @@ async function getTire (tires) {
 }
 
 async function getData (field, data) {
-    return await firebase.database().ref().child(field).once('value').then(snap => {
+    return await firebase.database().ref().child(field).once('value', snap => {
         snap.forEach(item => {
             data.push(item.val().code);
         });
