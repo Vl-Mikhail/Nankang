@@ -33,4 +33,4 @@
 
 
 <h5>Запуск эмулятора под Android</h5>
-~/Library/Android/sdk/tools/emulator | ./emulator -avd Nexus_5X_API_23
+~/Library/Android/sdk/tools | ./emulator -avd Nexus_5X_API_23
