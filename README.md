@@ -1,3 +1,29 @@
+# iNankang (iOS и Android)
+
+<h4>Главный экран</h4>
+![alt text](https://firebasestorage.googleapis.com/v0/b/nankang-78d26.appspot.com/o/git%2F1.png?alt=media&token=27a03fd5-0099-4003-8dab-80b22ae518cf)
+
+<h4>Выбор значения для поиска</h4>
+![alt text](https://firebasestorage.googleapis.com/v0/b/nankang-78d26.appspot.com/o/git%2F2.png?alt=media&token=3ce18270-63a6-4889-970a-2a6f5784bd22)
+
+<h4>Список моделий</h4>
+![alt text](https://firebasestorage.googleapis.com/v0/b/nankang-78d26.appspot.com/o/git%2F3.png?alt=media&token=a8840a50-bf3f-4206-813c-2d175bde01ef)
+
+<h4>Описание товара</h4>
+![alt text](https://firebasestorage.googleapis.com/v0/b/nankang-78d26.appspot.com/o/git%2F4.png?alt=media&token=67661583-0af9-43a3-97b5-858c816b4aeb)
+
+
+В данном проекте использовались технологии:
+<ol>
+    <li>React Native</li>
+    <li>Redux</li>
+    <li>Firebase</li>
+</ol>
+
+Среда разработки WebStorm.
+
+<h4>Заметки</h4>
+
 You will have to create a key to sign the apk. Use below to create your key:
 
 keytool -genkey -v -keystore my-app-key.keystore -alias my-app-alias -keyalg RSA -keysize 2048 -validity 10000
@@ -14,7 +40,6 @@ cd android && ./gradlew assembleRelease
 
 Upload the APK to your phone. The -r flag will replace the existing app (if it exists)
 adb install -r ./app/build/outputs/apk/app-release-unsigned.apk
-
 
 
 **How to add icons to React Native app**
